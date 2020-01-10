@@ -34,8 +34,8 @@ defmodule GameTest do
   end
 
   test "validate a good guess" do
-    game = Game.new_game("Elixir")
-    { game, _tally } = Game.make_move(game, "E")
+    game = Game.new_game("elixir")
+    { game, _tally } = Game.make_move(game, "e")
     assert game.game_state == :good_guess
 
     { game, _tally } = Game.make_move(game, "l")
@@ -49,5 +49,35 @@ defmodule GameTest do
 
     { game, _tally } = Game.make_move(game, "r")
     assert game.game_state == :won
+  end
+
+  test "bad guess is recognized" do
+    game = Game.new_game("elixir")
+    { game, _tally } = Game.make_move(game, "a")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 6
+
+    { game, _tally } = Game.make_move(game, "b")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 5
+
+    { game, _tally } = Game.make_move(game, "c")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 4
+
+    { game, _tally } = Game.make_move(game, "d")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 3
+
+    { game, _tally } = Game.make_move(game, "f")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 2
+
+    { game, _tally } = Game.make_move(game, "g")
+    assert game.game_state == :bad_guess
+    assert game.turns_left == 1
+
+    { game, _tally } = Game.make_move(game, "h")
+    assert game.game_state == :lost
   end
 end
