@@ -7,7 +7,7 @@ defmodule TextClient do
     |> Player.play()
   end
 
-  def setup_game(game) do
+  defp setup_game(game) do
     %State{
       game_service: game,
       tally: Hangman.tally(game)
