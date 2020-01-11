@@ -6,6 +6,6 @@ defmodule Hangman do
 
   def make_move(game, guess) do
     new_game = Game.make_move(game, guess)
-    {new_game, tally(game)}
+    {new_game, tally(new_game)}
   end
 end
