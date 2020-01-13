@@ -1,9 +1,19 @@
 defmodule Dictionary.Application do
 
-  alias Dictionary.WordList
-
   def start(_type, _args) do
-    WordList.start_link()
+
+    import Supervisor.Spec
+
+    children = [
+      worker(Dictionary.WordList, [])
+    ]
+
+    options = [
+      name: Dictionary.Supervisor,
+      strategy: :one_for_one,
+    ]
+
+    Supervisor.start_link(children, options)
   end
 
 end
