@@ -2,8 +2,6 @@ defmodule TextClient.Mover do
   alias TextClient.State
 
   def make_move(game = %State{}) do
-    {gs, tally} = Hangman.make_move(game.game_service, game.guess)
-
-    %{game | game_service: gs, tally: tally}
+    %{game | tally: Hangman.make_move(game.game_service, game.guess)}
   end
 end
