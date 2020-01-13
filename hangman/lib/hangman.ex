@@ -4,8 +4,8 @@ defmodule Hangman do
     pid
   end
 
-  def tally(game_pid, _guess) do
-    GenServer.cast(game_pid, {:tally})
+  def tally(game_pid) do
+    GenServer.call(game_pid, {:tally})
   end
 
   def make_move(game_pid, guess) do
